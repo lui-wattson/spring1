@@ -21,7 +21,7 @@ public class AddCommentRequest {
     private User userId;
     private Long article;
 
-    public Comment toEntity() {//생성자를 사용해 객체 생성
+    public Comment toEntity() { // 생성자를 사용해 객체 생성
         return Comment.builder()
                 .comment(comment)
                 .userId(userId)

@@ -11,15 +11,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter//모든필드에 대한 접근자 메서드 생성
+@Getter // 모든필드에 대한 접근자 메서드 생성
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)//기본 생성자 생성
 @EntityListeners(AuditingEntityListener.class)
 public class Article {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id",updatable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Long id;
 
     @Column(name="title",nullable = false)
@@ -51,9 +52,6 @@ public class Article {
 
     @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     // cascade = CascadeType.REMOVE -> 게시글 삭제 시 관련 댓글 같이 삭제
-    // 원댓글 삭제 시 대댓글 삭제되는 건 직접 구현해야됨
-    // 대댓글 구현하기
-    // 작성자 매핑 기능(마지막에 해보기)
     @OrderBy("id asc") // 댓글 정렬
     private List<Comment> comments;
 }
